@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "staffreplay",
+  "version": "${version}",
+  "name": "Staff Replay",
+  "environment": "client",
+
+  "entrypoints": {
+    "main": [
+      "com.example.staffreplay.StaffReplay"
+    ],
+
+    "client": [
+      "com.example.staffreplay.StaffReplayClient"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21.4",
+    "java": ">=17",
+    "fabric-api": "*"
+  }
+}

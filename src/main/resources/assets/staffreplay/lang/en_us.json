@@ -1,0 +1,9 @@
+{
+  "category.staffreplay": "Staff Replay",
+
+  "key.staffreplay.save": "Save Replay",
+  "key.staffreplay.toggle_buffer": "Pause Recording",
+  "key.staffreplay.cycle_length": "Clip Length",
+  "key.staffreplay.add_marker": "Add Marker",
+  "key.staffreplay.cycle_recording_fps": "Recording FPS"
+}
