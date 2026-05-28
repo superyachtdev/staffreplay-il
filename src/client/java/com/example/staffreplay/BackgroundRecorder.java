@@ -3,12 +3,15 @@ package com.example.staffreplay;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.CompletableFuture;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import java.io.InputStream;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL21;
 import org.lwjgl.opengl.GL30;
+import java.util.concurrent.CompletableFuture;
 import org.lwjgl.opengl.GL32;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -111,7 +114,7 @@ private int outputHeight;
     /*
      * REUSABLE MEMORY
      */
-private int[] pboIds = new int[16];
+private int[] pboIds = new int[8];
 
 private int currentPboIndex = 0;
 
@@ -624,7 +627,7 @@ private void startEncoderThread() {
 
     encoderThread.setDaemon(true);
 
-    encoderThread.setPriority(Thread.MIN_PRIORITY);
+    encoderThread.setPriority(Thread.NORM_PRIORITY);
 
     encoderThread.start();
 }
@@ -1301,8 +1304,7 @@ if (now - lastFrameTime > frameTimeNs * 2L) {
 ) {
 
     rotatingChunk = true;
-
-new Thread(() -> {
+CompletableFuture.runAsync(() -> {
 
     try {
 
@@ -1313,7 +1315,7 @@ new Thread(() -> {
         rotatingChunk = false;
     }
 
-}, "staffreplay-chunk-rotate").start();
+});
 }
 
         Framebuffer framebuffer =
@@ -1327,7 +1329,7 @@ new Thread(() -> {
         (currentPboIndex + 1) % pboIds.length;
 
 int mapPboIndex =
-        (currentPboIndex + 8) % pboIds.length;
+        (currentPboIndex + 4) % pboIds.length;
         /*
          * READ CURRENT FRAME INTO CURRENT PBO
          */
